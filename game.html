@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Page - EASY GAME FIND</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-bg: #1e1e40;
+            --sidebar-bg: #2b2b63;
+            --sidebar-active: #6c5ce7;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent-color: #ff7675;
+            --button-primary: #6c5ce7;
+            --button-hover: #5649c0;
+            --star-inactive: #555;
+            --star-active: #fdcb6e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .game-header {
+            background-color: var(--sidebar-bg);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            position: sticky;
+            top: 0;
+        }
+        
+        .game-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .back-button, .fullscreen-button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover, .fullscreen-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .back-button svg, .fullscreen-button svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .game-section {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* 添加覆盖层防止直接点击广告 */
+        .iframe-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 10;
+            display: none; /* 默认隐藏 */
+        }
+        
+        .show-overlay .iframe-overlay {
+            display: block;
+        }
+        
+        .game-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .game-description {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .game-description h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: var(--accent-color);
+        }
+        
+        .game-description p {
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        .rating-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .rating-section h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: var(--accent-color);
+        }
+        
+        .rating-stats {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .rating-average {
+            font-size: 48px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .rating-count {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            margin: 15px 0;
+        }
+        
+        .star {
+            color: var(--star-inactive);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .star.active {
+            color: var(--star-active);
+        }
+        
+        .comment-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .comment-section h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: var(--accent-color);
+        }
+        
+        .comment-form {
+            margin-bottom: 30px;
+        }
+        
+        .comment-form textarea {
+            width: 100%;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            resize: none;
+        }
+        
+        .comment-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        .submit-button {
+            background-color: var(--button-primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-button:hover {
+            background-color: var(--button-hover);
+        }
+        
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .comment {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+        }
+        
+        .comment-date {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        .comment-content {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .no-comments {
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .similar-games {
+            margin-top: 30px;
+        }
+        
+        .similar-games h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: var(--accent-color);
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .game-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .game-card-content {
+            padding: 15px;
+        }
+        
+        .game-card-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .game-card-category {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .game-tag {
+            background-color: rgba(108, 92, 231, 0.3);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* Fullscreen mode styles */
+        .fullscreen-mode .game-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(43, 43, 99, 0.7);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .fullscreen-mode .game-section {
+            height: 100vh;
+            padding-bottom: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .fullscreen-mode:hover .game-header {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 18px;
+            }
+            
+            .back-button, .fullscreen-button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .main-content {
+                padding: 10px;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .rating-average {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-header">
+        <h1 class="game-title" id="game-title">Loading...</h1>
+        <div class="header-buttons">
+            <button class="fullscreen-button" id="fullscreen-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                </svg>
+                Fullscreen
+            </button>
+            <button class="back-button" id="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back
+            </button>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="game-section">
+            <iframe id="game-iframe" class="game-iframe" frameborder="0" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+            <div class="iframe-overlay show-overlay"></div>
+        </div>
+        
+        <div class="game-info">
+            <div class="game-description">
+                <h2>Game Introduction</h2>
+                <p id="game-description-text">Loading...</p>
+                <div class="game-tags" id="game-tags">
+                    <!-- Tags will be added dynamically via JS -->
+                </div>
+            </div>
+            
+            <div class="rating-section">
+                <h2>Ratings & Reviews</h2>
+                <div class="rating-stats">
+                    <div class="rating-average" id="rating-average">0.0</div>
+                    <div class="rating-count" id="rating-count">0 ratings</div>
+                </div>
+                
+                <div>Your Rating:</div>
+                <div class="star-rating" id="user-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comment-section">
+            <h2>User Comments</h2>
+            <div class="comment-form">
+                <textarea placeholder="Share your gaming experience..." id="comment-input"></textarea>
+                <button class="submit-button" id="submit-comment">Submit Comment</button>
+            </div>
+            
+            <div class="comments-list" id="comments-list">
+                <div class="no-comments">No comments yet. Be the first to comment!</div>
+            </div>
+        </div>
+        
+        <div class="similar-games">
+            <h2>Similar Games</h2>
+            <div class="games-grid" id="similar-games-grid">
+                <!-- Similar game cards will be added dynamically via JS -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const gameId = urlParams.get('id');
+            
+            // 从localStorage加载游戏数据
+            let gameTitle, gameUrl, gameDescription, gameImage, gameTags;
+            
+            if (gameId) {
+                try {
+                    // 尝试从localStorage加载游戏数据
+                    const gameData = JSON.parse(localStorage.getItem(gameId));
+                    if (gameData) {
+                        gameTitle = gameData.title;
+                        gameUrl = gameData.url;
+                        gameDescription = gameData.description || 'This is an exciting game with easy-to-learn but hard-to-master mechanics. Collect keys, open chests, pass levels and enjoy this epic adventure!';
+                        gameImage = gameData.image;
+                        gameTags = gameData.tags ? gameData.tags.split(',') : ['Casual', 'Action', 'Adventure', 'Single Player'];
+                    } else {
+                        console.error('Game data not found in localStorage');
+                    }
+                } catch (error) {
+                    console.error('Error loading game data from localStorage:', error);
+                }
+            } else {
+                // 兼容旧的URL参数格式
+                gameTitle = urlParams.get('title');
+                gameUrl = urlParams.get('url');
+                gameDescription = urlParams.get('description') || 'This is an exciting game with easy-to-learn but hard-to-master mechanics. Collect keys, open chests, pass levels and enjoy this epic adventure!';
+            }
+            
+            // Set page title
+            document.title = gameTitle ? `${gameTitle} - EASY GAME FIND` : 'EASY GAME FIND';
+            
+            // Set game title
+            const gameTitleElement = document.getElementById('game-title');
+            if (gameTitleElement && gameTitle) {
+                gameTitleElement.textContent = gameTitle;
+            }
+            
+            // Set game description
+            const gameDescriptionElement = document.getElementById('game-description-text');
+            if (gameDescriptionElement) {
+                gameDescriptionElement.textContent = gameDescription;
+            }
+            
+            // Set game iframe
+            const gameIframe = document.getElementById('game-iframe');
+            const iframeOverlay = document.querySelector('.iframe-overlay');
+            
+            if (gameIframe && gameUrl) {
+                // 创建一个临时消息提示
+                const createMessage = (text, duration = 3000) => {
+                    const message = document.createElement('div');
+                    message.className = 'iframe-message';
+                    message.textContent = text;
+                    document.querySelector('.game-section').appendChild(message);
+                    
+                    setTimeout(() => {
+                        message.classList.add('fade-out');
+                        setTimeout(() => message.remove(), 500);
+                    }, duration);
+                };
+                
+                // 添加iframe加载事件监听器
+                gameIframe.addEventListener('load', function() {
+                    try {
+                        console.log("Iframe loaded:", gameUrl);
+                        
+                        // 检测广告特征
+                        const checkForAds = () => {
+                            // 显示覆盖层保护
+                            if (iframeOverlay) {
+                                iframeOverlay.classList.add('show-overlay');
+                                
+                                // 10秒后移除覆盖层
+                                setTimeout(() => {
+                                    iframeOverlay.classList.remove('show-overlay');
+                                    createMessage('保护模式已关闭，请享受游戏！');
+                                }, 10000);
+                            }
+                        };
+                        
+                        // 立即检查广告
+                        checkForAds();
+                        
+                        // 如果游戏URL包含可能的广告网站标识
+                        if (gameUrl.includes('onlinegames.io') || 
+                            gameUrl.includes('wgplayer') || 
+                            gameUrl.includes('ad')) {
+                            createMessage('已检测到广告保护，覆盖层将在10秒后消失');
+                        }
+                    } catch (e) {
+                        console.log("Cannot access iframe content due to same-origin policy");
+                    }
+                });
+                
+                // 添加覆盖层点击事件，使其只阻止第一次点击
+                if (iframeOverlay) {
+                    // 覆盖层双击事件
+                    let clickCount = 0;
+                    let clickTimer = null;
+                    
+                    iframeOverlay.addEventListener('click', function(e) {
+                        // 阻止点击事件传递到iframe
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        clickCount++;
+                        
+                        if (clickCount === 1) {
+                            clickTimer = setTimeout(() => {
+                                // 单击 - 显示提示
+                                createMessage('再次点击关闭保护层');
+                                clickCount = 0;
+                            }, 300);
+                        } else if (clickCount === 2) {
+                            // 双击 - 关闭覆盖层
+                            clearTimeout(clickTimer);
+                            this.classList.remove('show-overlay');
+                            createMessage('保护已关闭，请小心广告');
+                            clickCount = 0;
+                        }
+                    });
+                }
+
+                // 为iframe添加额外的保护
+                gameIframe.src = gameUrl;
+                
+                // 监听iframe内部可能的重定向
+                window.addEventListener('message', function(event) {
+                    // 只处理来自iframe的消息
+                    if (event.source === gameIframe.contentWindow) {
+                        console.log('收到iframe消息:', event.data);
+                    }
+                });
+                
+                // 添加鼠标移动事件监听，尝试检测广告按钮位置
+                let adWarningElement = null;
+                
+                document.addEventListener('mousemove', function(e) {
+                    // 获取游戏区域的位置
+                    const gameSection = document.querySelector('.game-section');
+                    const rect = gameSection.getBoundingClientRect();
+                    
+                    // 检查鼠标是否在游戏区域内
+                    if (
+                        e.clientX >= rect.left && 
+                        e.clientX <= rect.right && 
+                        e.clientY >= rect.top && 
+                        e.clientY <= rect.bottom
+                    ) {
+                        // 这些是常见广告按钮的区域（基于经验值）
+                        const adZones = [
+                            { x: [rect.right - 120, rect.right], y: [rect.top, rect.top + 60] }, // 右上角
+                            { x: [rect.left, rect.left + 120], y: [rect.top, rect.top + 60] },   // 左上角
+                            { x: [rect.width/2 - 100, rect.width/2 + 100], y: [rect.height/2 - 50, rect.height/2 + 50] } // 中间区域
+                        ];
+                        
+                        // 检查鼠标是否在广告区域
+                        let inAdZone = false;
+                        for (const zone of adZones) {
+                            if (
+                                e.clientX >= rect.left + zone.x[0] && 
+                                e.clientX <= rect.left + zone.x[1] && 
+                                e.clientY >= rect.top + zone.y[0] && 
+                                e.clientY <= rect.top + zone.y[1]
+                            ) {
+                                inAdZone = true;
+                                
+                                // 如果已经显示了警告，就不需要再创建
+                                if (!adWarningElement) {
+                                    adWarningElement = document.createElement('div');
+                                    adWarningElement.className = 'ad-warning';
+                                    adWarningElement.textContent = '可能的广告区域';
+                                    gameSection.appendChild(adWarningElement);
+                                }
+                                
+                                // 更新警告位置
+                                adWarningElement.style.left = (e.clientX - rect.left) + 'px';
+                                adWarningElement.style.top = (e.clientY - rect.top - 30) + 'px';
+                                break;
+                            }
+                        }
+                        
+                        // 如果不在广告区域但警告元素存在，则移除
+                        if (!inAdZone && adWarningElement) {
+                            adWarningElement.remove();
+                            adWarningElement = null;
+                        }
+                    } else if (adWarningElement) {
+                        // 如果鼠标离开游戏区域，移除警告
+                        adWarningElement.remove();
+                        adWarningElement = null;
+                    }
+                });
+            } else {
+                // If no game URL, show error message
+                const gameSection = document.querySelector('.game-section');
+                if (gameSection) {
+                    gameSection.innerHTML = `
+                        <div style="text-align: center; padding: 40px; height: 100%;">
+                            <h2>Game Failed to Load</h2>
+                            <p style="margin-top: 20px; color: var(--text-secondary);">
+                                Unable to load the game. Please return to the homepage and try again.
+                            </p>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Add game tags
+            const gameTagsElement = document.getElementById('game-tags');
+            if (gameTagsElement) {
+                const tags = Array.isArray(gameTags) ? gameTags : ['Casual', 'Action', 'Adventure', 'Single Player'];
+                gameTagsElement.innerHTML = ''; // 清空现有标签
+                
+                tags.forEach(tag => {
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'game-tag';
+                    tagElement.textContent = tag.trim();
+                    gameTagsElement.appendChild(tagElement);
+                });
+            }
+            
+            // Back button click event
+            const backButton = document.getElementById('back-button');
+            if (backButton) {
+                backButton.addEventListener('click', () => {
+                    // 从localStorage获取最后一个分类
+                    const lastCategory = localStorage.getItem('lastCategory') || 'all';
+                    // 返回主页并带上分类hash
+                    window.location.href = `index.html#${lastCategory}`;
+                });
+            }
+            
+            // Fullscreen button click event
+            const fullscreenButton = document.getElementById('fullscreen-button');
+            if (fullscreenButton) {
+                fullscreenButton.addEventListener('click', toggleFullscreen);
+            }
+            
+            // Rating system
+            const stars = document.querySelectorAll('.star');
+            let userRating = 0;
+            
+            // 从localStorage加载评分数据
+            const loadRatingsFromStorage = () => {
+                const gameId = gameTitle || 'default-game';
+                const savedRatings = localStorage.getItem(`game-ratings-${gameId}`);
+                if (savedRatings) {
+                    const ratingsData = JSON.parse(savedRatings);
+                    document.getElementById('rating-average').textContent = ratingsData.averageRating;
+                    document.getElementById('rating-count').textContent = `${ratingsData.count} ratings`;
+                    
+                    // 如果用户之前有评分，恢复他们的评分
+                    if (ratingsData.userRating) {
+                        userRating = ratingsData.userRating;
+                        highlightStars(userRating);
+                    }
+                }
+            };
+            
+            // 加载保存的评分
+            loadRatingsFromStorage();
+            
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    highlightStars(value);
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    highlightStars(userRating);
+                });
+                
+                star.addEventListener('click', function() {
+                    userRating = parseInt(this.getAttribute('data-value'));
+                    highlightStars(userRating);
+                    saveRating(userRating);
+                });
+            });
+            
+            function highlightStars(count) {
+                stars.forEach(star => {
+                    const value = parseInt(star.getAttribute('data-value'));
+                    if (value <= count) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+            
+            function saveRating(rating) {
+                // Logic to save rating to server could be added here
+                console.log(`Saving rating: ${rating}`);
+                
+                // Simulate updating average rating
+                const currentRating = parseFloat(document.getElementById('rating-average').textContent);
+                const currentCount = parseInt(document.getElementById('rating-count').textContent);
+                const newCount = currentCount + 1;
+                const newRating = ((currentRating * currentCount) + rating) / newCount;
+                
+                document.getElementById('rating-average').textContent = newRating.toFixed(1);
+                document.getElementById('rating-count').textContent = `${newCount} ratings`;
+                
+                // 保存到localStorage
+                const gameId = gameTitle || 'default-game';
+                localStorage.setItem(`game-ratings-${gameId}`, JSON.stringify({
+                    averageRating: newRating.toFixed(1),
+                    count: newCount,
+                    userRating: rating
+                }));
+            }
+            
+            // Comment system
+            const commentInput = document.getElementById('comment-input');
+            const submitButton = document.getElementById('submit-comment');
+            const commentsList = document.getElementById('comments-list');
+            
+            // 从localStorage加载评论
+            const loadCommentsFromStorage = () => {
+                const gameId = gameTitle || 'default-game';
+                const savedComments = localStorage.getItem(`game-comments-${gameId}`);
+                
+                if (savedComments) {
+                    const comments = JSON.parse(savedComments);
+                    
+                    // 清除"无评论"提示
+                    const noComments = commentsList.querySelector('.no-comments');
+                    if (noComments && comments.length > 0) {
+                        noComments.remove();
+                    }
+                    
+                    // 添加保存的评论
+                    comments.forEach(comment => {
+                        const commentElement = document.createElement('div');
+                        commentElement.className = 'comment';
+                        commentElement.innerHTML = `
+                            <div class="comment-header">
+                                <div class="comment-author">${comment.author}</div>
+                                <div class="comment-date">${comment.date}</div>
+                            </div>
+                            <div class="comment-content">${comment.text}</div>
+                        `;
+                        commentsList.prepend(commentElement);
+                    });
+                }
+            };
+            
+            // 加载保存的评论
+            loadCommentsFromStorage();
+            
+            if (submitButton && commentInput && commentsList) {
+                submitButton.addEventListener('click', () => {
+                    const commentText = commentInput.value.trim();
+                    if (commentText) {
+                        addComment(commentText);
+                        commentInput.value = '';
+                    }
+                });
+            }
+            
+            function addComment(text) {
+                // Remove "no comments" notice
+                const noComments = commentsList.querySelector('.no-comments');
+                if (noComments) {
+                    noComments.remove();
+                }
+                
+                // 创建评论作者名称
+                const authorName = `User${Math.floor(Math.random() * 10000)}`;
+                
+                // 创建日期字符串
+                const now = new Date();
+                const dateString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                
+                // Create new comment
+                const comment = document.createElement('div');
+                comment.className = 'comment';
+                comment.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">${authorName}</div>
+                        <div class="comment-date">${dateString}</div>
+                    </div>
+                    <div class="comment-content">${text}</div>
+                `;
+                
+                commentsList.prepend(comment);
+                
+                // 保存评论到localStorage
+                saveCommentToStorage({
+                    author: authorName,
+                    date: dateString,
+                    text: text
+                });
+            }
+            
+            function saveCommentToStorage(comment) {
+                const gameId = gameTitle || 'default-game';
+                let comments = [];
+                
+                // 获取现有评论
+                const savedComments = localStorage.getItem(`game-comments-${gameId}`);
+                if (savedComments) {
+                    comments = JSON.parse(savedComments);
+                }
+                
+                // 添加新评论
+                comments.unshift(comment);
+                
+                // 保存回localStorage
+                localStorage.setItem(`game-comments-${gameId}`, JSON.stringify(comments));
+            }
+            
+            // Add similar games
+            const similarGamesGrid = document.getElementById('similar-games-grid');
+            if (similarGamesGrid) {
+                // 从url.json加载游戏数据
+                fetch('url.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(games => {
+                        // 随机选择4个游戏
+                        const shuffled = [...games].sort(() => 0.5 - Math.random());
+                        const selectedGames = shuffled.slice(0, 4);
+                        
+                        // 渲染游戏卡片
+                        selectedGames.forEach(game => {
+                            const category = game.tags ? game.tags.split(',')[0] : 'Game';
+                            const gameCard = document.createElement('div');
+                            gameCard.className = 'game-card';
+                            gameCard.innerHTML = `
+                                <img src="${game.image}" alt="${game.title}" onerror="this.src='https://via.placeholder.com/200x120/718096/ffffff?text=Game+Image'">
+                                <div class="game-card-content">
+                                    <h3 class="game-card-title">${game.title}</h3>
+                                    <div class="game-card-category">${category}</div>
+                                </div>
+                            `;
+                            similarGamesGrid.appendChild(gameCard);
+                            
+                            gameCard.addEventListener('click', () => {
+                                // 保存游戏数据到localStorage
+                                const gameKey = 'game_' + game.title.replace(/[^a-zA-Z0-9]/g, '_');
+                                const gameData = {
+                                    title: game.title,
+                                    url: game.embed,
+                                    description: game.description || '',
+                                    image: game.image,
+                                    tags: game.tags
+                                };
+                                
+                                // 保存到localStorage
+                                localStorage.setItem(gameKey, JSON.stringify(gameData));
+                                
+                                // 导航到游戏页面
+                                window.location.href = `game.html?id=${encodeURIComponent(gameKey)}`;
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error loading similar games:', error);
+                        similarGamesGrid.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 20px;">Failed to load similar games.</p>';
+                    });
+            }
+            
+            // Toggle fullscreen mode
+            function toggleFullscreen() {
+                const body = document.body;
+                const gameSection = document.querySelector('.game-section');
+                
+                if (!document.fullscreenElement && 
+                    !document.webkitFullscreenElement && 
+                    !document.mozFullScreenElement && 
+                    !document.msFullscreenElement) {
+                    // Enter fullscreen mode
+                    body.classList.add('fullscreen-mode');
+                    
+                    try {
+                        if (gameSection.requestFullscreen) {
+                            gameSection.requestFullscreen();
+                        } else if (gameSection.mozRequestFullScreen) { /* Firefox */
+                            gameSection.mozRequestFullScreen();
+                        } else if (gameSection.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                            gameSection.webkitRequestFullscreen();
+                        } else if (gameSection.msRequestFullscreen) { /* IE/Edge */
+                            gameSection.msRequestFullscreen();
+                        }
+                    } catch (error) {
+                        console.error("全屏模式错误:", error);
+                    }
+                    
+                    if (fullscreenButton) {
+                        fullscreenButton.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            Exit Fullscreen
+                        `;
+                    }
+                } else {
+                    // Exit fullscreen mode
+                    body.classList.remove('fullscreen-mode');
+                    
+                    try {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.mozCancelFullScreen) { /* Firefox */
+                            document.mozCancelFullScreen();
+                        } else if (document.webkitExitFullscreen) { /* Chrome, Safari & Opera */
+                            document.webkitExitFullscreen();
+                        } else if (document.msExitFullscreen) { /* IE/Edge */
+                            document.msExitFullscreen();
+                        }
+                    } catch (error) {
+                        console.error("退出全屏模式错误:", error);
+                    }
+                    
+                    if (fullscreenButton) {
+                        fullscreenButton.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                            </svg>
+                            Fullscreen
+                        `;
+                    }
+                }
+            }
+            
+            // Listen for fullscreen change events
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+            document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+            
+            function handleFullscreenChange() {
+                if (!document.fullscreenElement && 
+                    !document.webkitFullscreenElement && 
+                    !document.mozFullScreenElement && 
+                    !document.msFullscreenElement) {
+                    // If exited fullscreen mode
+                    document.body.classList.remove('fullscreen-mode');
+                    
+                    if (fullscreenButton) {
+                        fullscreenButton.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                            </svg>
+                            Fullscreen
+                        `;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

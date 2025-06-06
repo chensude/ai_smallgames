@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Background -->
+  <rect width="100" height="100" rx="20" fill="#007AFF" />
+  
+  <!-- Game controller shape -->
+  <path d="M70 35H30c-5.5 0-10 4.5-10 10v10c0 5.5 4.5 10 10 10h40c5.5 0 10-4.5 10-10V45c0-5.5-4.5-10-10-10z" fill="white" />
+  
+  <!-- D-pad -->
+  <rect x="30" y="45" width="5" height="15" rx="1" fill="#007AFF" />
+  <rect x="25" y="50" width="15" height="5" rx="1" fill="#007AFF" />
+  
+  <!-- Buttons -->
+  <circle cx="65" cy="50" r="5" fill="#FF3B30" />
+  <circle cx="75" cy="50" r="5" fill="#34C759" />
+  <circle cx="70" cy="45" r="5" fill="#FFCC00" />
+  <circle cx="70" cy="55" r="5" fill="#5AC8FA" />
+</svg> 
