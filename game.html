@@ -1,9 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Page - EASY GAME FIND</title>
+    <title data-i18n-title="site.title">Small Games - Play Free Online Small Games</title>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Small Games - Play Free Online Small Games">
+    <meta name="description" content="Play free online small games instantly at SmallGames.live - no download required! Enjoy our collection of fun, fast-loading small games for everyone.">
+    <meta name="keywords" content="small games, small game, online games, free games, browser games, no download games, html5 games, mobile games">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smallgames.live/game.html">
+    <meta property="og:title" content="Small Games - Play Free Online Small Games">
+    <meta property="og:description" content="Play free online small games instantly at SmallGames.live - no download required!">
+    <meta property="og:image" content="https://smallgames.live/favicon.svg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://smallgames.live/game.html">
+    <meta property="twitter:title" content="Small Games - Play Free Online Small Games">
+    <meta property="twitter:description" content="Play free online small games instantly at SmallGames.live - no download required!">
+    <meta property="twitter:image" content="https://smallgames.live/favicon.svg">
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SYJDB2H92Z"></script>
     <script>
@@ -13,6 +32,8 @@
         gtag('config', 'G-SYJDB2H92Z');
     </script>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <!-- 引入国际化脚本 -->
+    <script type="module" src="i18n/index.js"></script>
     <style>
         :root {
             --primary-bg: #1e1e40;
@@ -398,19 +419,162 @@
                 font-size: 36px;
             }
         }
+        
+        .ad-warning-message {
+            display: none;
+            background-color: rgba(255, 117, 117, 0.2);
+            border-left: 4px solid var(--accent-color);
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .game-header {
+                padding: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .game-header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .game-title {
+                font-size: 18px;
+                margin-right: 0;
+            }
+            
+            .game-content {
+                flex-direction: column;
+            }
+            
+            .game-iframe-container {
+                height: 300px;
+            }
+            
+            .game-info {
+                padding: 15px;
+            }
+            
+            .game-description {
+                font-size: 14px;
+            }
+        }
+        
+        /* 页脚样式 */
+        .site-footer {
+            background-color: var(--sidebar-bg);
+            color: var(--text-secondary);
+            padding: 40px 20px 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            color: var(--text-primary);
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .footer-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+        
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-bottom-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-bottom-links {
+                margin-top: 10px;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="game-header">
-        <h1 class="game-title" id="game-title">Loading...</h1>
+        <h1 class="game-title" id="game-title" data-i18n="game.loading">Loading...</h1>
         <div class="header-buttons">
-            <button class="fullscreen-button" id="fullscreen-button">
+            <button class="fullscreen-button" id="fullscreen-button" data-i18n="game.fullscreen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
                 </svg>
                 Fullscreen
             </button>
-            <button class="back-button" id="back-button">
+            <button class="back-button" id="back-button" data-i18n="game.back">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
@@ -427,7 +591,7 @@
         
         <div class="game-info">
             <div class="game-description">
-                <h2>Game Introduction</h2>
+                <h2 data-i18n="game.introduction">Game Introduction</h2>
                 <p id="game-description-text">Loading...</p>
                 <div class="game-tags" id="game-tags">
                     <!-- Tags will be added dynamically via JS -->
@@ -435,13 +599,13 @@
             </div>
             
             <div class="rating-section">
-                <h2>Ratings & Reviews</h2>
+                <h2 data-i18n="game.ratings">Ratings & Reviews</h2>
                 <div class="rating-stats">
                     <div class="rating-average" id="rating-average">0.0</div>
                     <div class="rating-count" id="rating-count">0 ratings</div>
                 </div>
                 
-                <div>Your Rating:</div>
+                <div data-i18n="game.yourRating">Your Rating:</div>
                 <div class="star-rating" id="user-rating">
                     <span class="star" data-value="1">★</span>
                     <span class="star" data-value="2">★</span>
@@ -453,19 +617,19 @@
         </div>
         
         <div class="comment-section">
-            <h2>User Comments</h2>
+            <h2 data-i18n="game.comments">User Comments</h2>
             <div class="comment-form">
-                <textarea placeholder="Share your gaming experience..." id="comment-input"></textarea>
-                <button class="submit-button" id="submit-comment">Submit Comment</button>
+                <textarea placeholder="Share your gaming experience..." id="comment-input" data-i18n="game.commentPlaceholder"></textarea>
+                <button class="submit-button" id="submit-comment" data-i18n="game.submitComment">Submit Comment</button>
             </div>
             
             <div class="comments-list" id="comments-list">
-                <div class="no-comments">No comments yet. Be the first to comment!</div>
+                <div class="no-comments" data-i18n="game.noComments">No comments yet. Be the first to comment!</div>
             </div>
         </div>
         
         <div class="similar-games">
-            <h2>Similar Games</h2>
+            <h2 data-i18n="game.similarGames">Similar Games</h2>
             <div class="games-grid" id="similar-games-grid">
                 <!-- Similar game cards will be added dynamically via JS -->
             </div>
@@ -479,7 +643,7 @@
             const gameId = urlParams.get('id');
             
             // 从localStorage加载游戏数据
-            let gameTitle, gameUrl, gameDescription, gameImage, gameTags;
+            let gameTitle, gameUrl, gameDescription, gameImage, gameTags, localizedTitles;
             
             if (gameId) {
                 try {
@@ -491,6 +655,7 @@
                         gameDescription = gameData.description || 'This is an exciting game with easy-to-learn but hard-to-master mechanics. Collect keys, open chests, pass levels and enjoy this epic adventure!';
                         gameImage = gameData.image;
                         gameTags = gameData.tags ? gameData.tags.split(',') : ['Casual', 'Action', 'Adventure', 'Single Player'];
+                        localizedTitles = gameData.localizedTitles || {}; // 保存本地化标题
                     } else {
                         console.error('Game data not found in localStorage');
                     }
@@ -504,13 +669,23 @@
                 gameDescription = urlParams.get('description') || 'This is an exciting game with easy-to-learn but hard-to-master mechanics. Collect keys, open chests, pass levels and enjoy this epic adventure!';
             }
             
+            // 获取当前语言
+            const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+            
+            // 使用本地化标题（如果有）
+            let displayTitle = gameTitle;
+            if (localizedTitles && localizedTitles[currentLang]) {
+                displayTitle = localizedTitles[currentLang];
+            }
+            
             // Set page title
-            document.title = gameTitle ? `${gameTitle} - EASY GAME FIND` : 'EASY GAME FIND';
+            document.title = displayTitle ? `${displayTitle} - SMALL GAMEFIND` : 'SMALL GAMEFIND';
             
             // Set game title
             const gameTitleElement = document.getElementById('game-title');
-            if (gameTitleElement && gameTitle) {
-                gameTitleElement.textContent = gameTitle;
+            if (gameTitleElement && displayTitle) {
+                gameTitleElement.textContent = displayTitle;
+                gameTitleElement.removeAttribute('data-i18n'); // 移除i18n属性，因为我们已经设置了本地化标题
             }
             
             // Set game description
@@ -528,7 +703,19 @@
                 const createMessage = (text, duration = 3000) => {
                     const message = document.createElement('div');
                     message.className = 'iframe-message';
-                    message.textContent = text;
+                    
+                    // 尝试获取国际化文本
+                    if (window.getTranslation) {
+                        const translation = window.getTranslation(text);
+                        if (translation) {
+                            message.textContent = translation;
+                        } else {
+                            message.textContent = text;
+                        }
+                    } else {
+                        message.textContent = text;
+                    }
+                    
                     document.querySelector('.game-section').appendChild(message);
                     
                     setTimeout(() => {
@@ -551,7 +738,7 @@
                                 // 10秒后移除覆盖层
                                 setTimeout(() => {
                                     iframeOverlay.classList.remove('show-overlay');
-                                    createMessage('保护模式已关闭，请享受游戏！');
+                                    createMessage('game.protectionMode');
                                 }, 10000);
                             }
                         };
@@ -563,7 +750,7 @@
                         if (gameUrl.includes('onlinegames.io') || 
                             gameUrl.includes('wgplayer') || 
                             gameUrl.includes('ad')) {
-                            createMessage('已检测到广告保护，覆盖层将在10秒后消失');
+                            createMessage('game.adProtection');
                         }
                     } catch (e) {
                         console.log("Cannot access iframe content due to same-origin policy");
@@ -586,14 +773,14 @@
                         if (clickCount === 1) {
                             clickTimer = setTimeout(() => {
                                 // 单击 - 显示提示
-                                createMessage('再次点击关闭保护层');
+                                createMessage('game.clickAgain');
                                 clickCount = 0;
                             }, 300);
                         } else if (clickCount === 2) {
                             // 双击 - 关闭覆盖层
                             clearTimeout(clickTimer);
                             this.classList.remove('show-overlay');
-                            createMessage('保护已关闭，请小心广告');
+                            createMessage('game.protectionClosed');
                             clickCount = 0;
                         }
                     });
@@ -647,7 +834,14 @@
                                 if (!adWarningElement) {
                                     adWarningElement = document.createElement('div');
                                     adWarningElement.className = 'ad-warning';
-                                    adWarningElement.textContent = '可能的广告区域';
+                                    
+                                    // 使用国际化文本
+                                    if (window.getTranslation) {
+                                        adWarningElement.textContent = window.getTranslation('game.possibleAdArea') || '可能的广告区域';
+                                    } else {
+                                        adWarningElement.textContent = '可能的广告区域';
+                                    }
+                                    
                                     gameSection.appendChild(adWarningElement);
                                 }
                                 
@@ -675,8 +869,8 @@
                 if (gameSection) {
                     gameSection.innerHTML = `
                         <div style="text-align: center; padding: 40px; height: 100%;">
-                            <h2>Game Failed to Load</h2>
-                            <p style="margin-top: 20px; color: var(--text-secondary);">
+                            <h2 data-i18n="game.gameFailedToLoad">Game Failed to Load</h2>
+                            <p style="margin-top: 20px; color: var(--text-secondary);" data-i18n="game.unableToLoadGame">
                                 Unable to load the game. Please return to the homepage and try again.
                             </p>
                         </div>
@@ -726,7 +920,17 @@
                 if (savedRatings) {
                     const ratingsData = JSON.parse(savedRatings);
                     document.getElementById('rating-average').textContent = ratingsData.averageRating;
-                    document.getElementById('rating-count').textContent = `${ratingsData.count} ratings`;
+                    
+                    // 使用国际化文本
+                    const ratingCountElement = document.getElementById('rating-count');
+                    if (ratingCountElement) {
+                        if (window.getTranslation) {
+                            const ratingText = window.getTranslation('game.ratings') || 'ratings';
+                            ratingCountElement.textContent = `${ratingsData.count} ${ratingText}`;
+                        } else {
+                            ratingCountElement.textContent = `${ratingsData.count} ratings`;
+                        }
+                    }
                     
                     // 如果用户之前有评分，恢复他们的评分
                     if (ratingsData.userRating) {
@@ -778,7 +982,17 @@
                 const newRating = ((currentRating * currentCount) + rating) / newCount;
                 
                 document.getElementById('rating-average').textContent = newRating.toFixed(1);
-                document.getElementById('rating-count').textContent = `${newCount} ratings`;
+                
+                // 使用国际化文本
+                const ratingCountElement = document.getElementById('rating-count');
+                if (ratingCountElement) {
+                    if (window.getTranslation) {
+                        const ratingText = window.getTranslation('game.ratings') || 'ratings';
+                        ratingCountElement.textContent = `${newCount} ${ratingText}`;
+                    } else {
+                        ratingCountElement.textContent = `${newCount} ratings`;
+                    }
+                }
                 
                 // 保存到localStorage
                 const gameId = gameTitle || 'default-game';
@@ -910,10 +1124,20 @@
                             const category = game.tags ? game.tags.split(',')[0] : 'Game';
                             const gameCard = document.createElement('div');
                             gameCard.className = 'game-card';
+                            
+                            // 获取当前语言
+                            const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+                            
+                            // 尝试获取本地化的游戏标题
+                            let gameTitle = game.title;
+                            if (game.localizedTitles && game.localizedTitles[currentLang]) {
+                                gameTitle = game.localizedTitles[currentLang];
+                            }
+                            
                             gameCard.innerHTML = `
-                                <img src="${game.image}" alt="${game.title}" onerror="this.src='https://via.placeholder.com/200x120/718096/ffffff?text=Game+Image'">
+                                <img src="${game.image}" alt="${gameTitle}" onerror="this.src='https://via.placeholder.com/200x120/718096/ffffff?text=Game+Image'">
                                 <div class="game-card-content">
-                                    <h3 class="game-card-title">${game.title}</h3>
+                                    <h3 class="game-card-title">${gameTitle}</h3>
                                     <div class="game-card-category">${category}</div>
                                 </div>
                             `;
@@ -927,7 +1151,8 @@
                                     url: game.embed,
                                     description: game.description || '',
                                     image: game.image,
-                                    tags: game.tags
+                                    tags: game.tags,
+                                    localizedTitles: game.localizedTitles // 保存本地化标题
                                 };
                                 
                                 // 保存到localStorage
@@ -1033,5 +1258,47 @@
             }
         });
     </script>
+    
+    <!-- 页脚区域 - 用于SEO和导航 -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-i18n="footer.aboutTitle">About Small Games</h3>
+                <p data-i18n="footer.aboutText">SmallGames.live is the premier destination for free online small games. Our collection includes 200+ carefully selected small games that are perfect for quick entertainment on any device.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3 data-i18n="footer.categoriesTitle">Small Game Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="/category/action" data-i18n="categories.action">Action</a> <span data-i18n="footer.smallGames">Small Games</span></li>
+                    <li><a href="/category/puzzle" data-i18n="categories.puzzle">Puzzle</a> <span data-i18n="footer.smallGames">Small Games</span></li>
+                    <li><a href="/category/racing" data-i18n="categories.racing">Racing</a> <span data-i18n="footer.smallGames">Small Games</span></li>
+                    <li><a href="/category/arcade" data-i18n="categories.arcade">Arcade</a> <span data-i18n="footer.smallGames">Small Games</span></li>
+                    <li><a href="/category/sports" data-i18n="categories.sports">Sports</a> <span data-i18n="footer.smallGames">Small Games</span></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 data-i18n="footer.quickLinksTitle">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="/small-games" data-i18n="footer.allSmallGames">All Small Games</a></li>
+                    <li><a href="/free-small-games" data-i18n="footer.freeSmallGames">Free Small Games</a></li>
+                    <li><a href="/online-small-games" data-i18n="footer.onlineSmallGames">Online Small Games</a></li>
+                    <li><a href="/small-games-for-kids" data-i18n="footer.smallGamesForKids">Small Games for Kids</a></li>
+                    <li><a href="/small-games-for-mobile" data-i18n="footer.smallGamesForMobile">Small Games for Mobile</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 SmallGames.live - <span data-i18n="footer.copyright">The Best Collection of Small Games</span></p>
+            <div class="footer-bottom-links">
+                <a href="/about" data-i18n="footer.about">About</a>
+                <a href="/privacy" data-i18n="footer.privacy">Privacy</a>
+                <a href="/terms" data-i18n="footer.terms">Terms</a>
+                <a href="/cookies" data-i18n="footer.cookies">Cookies</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 

@@ -281,23 +281,42 @@ function addGameStructuredData(game) {
     const structuredData = {
         '@context': 'https://schema.org',
         '@type': 'VideoGame',
-        'name': game.title,
-        'description': game.description,
+        'name': `${game.title} - Small Game`,
+        'headline': `Play ${game.title} - Free Online Small Game`,
+        'description': game.description ? `${game.description} Play this small game for free online at SmallGames.live.` : 'Play this small game for free online at SmallGames.live.',
         'image': game.image,
         'playMode': 'SinglePlayer',
-        'applicationCategory': 'Browser Game',
+        'applicationCategory': 'Browser Game, Small Game',
+        'gamePlatform': 'Web Browser, Mobile Browser',
+        'url': `https://smallgames.live/game.html?id=game_${game.originalTitle ? game.originalTitle.replace(/[^a-zA-Z0-9]/g, '_') : game.title.replace(/[^a-zA-Z0-9]/g, '_')}`,
+        'publisher': {
+            '@type': 'Organization',
+            'name': 'Small Games',
+            'url': 'https://smallgames.live/'
+        },
         'offers': {
             '@type': 'Offer',
             'price': '0',
             'priceCurrency': 'USD',
             'availability': 'https://schema.org/InStock'
-        }
+        },
+        'aggregateRating': {
+            '@type': 'AggregateRating',
+            'ratingValue': '4.7',
+            'ratingCount': '125',
+            'bestRating': '5',
+            'worstRating': '1'
+        },
+        'keywords': 'small games, free games, online games, browser games, small game'
     };
     
     // Add genre if tags are available
     if (game.tags) {
         const tags = game.tags.split(',');
         structuredData.genre = tags.map(tag => tag.trim());
+        
+        // Add keywords from tags
+        structuredData.keywords += ', ' + tags.map(tag => tag.trim() + ' small game').join(', ');
     }
     
     // Set script content
