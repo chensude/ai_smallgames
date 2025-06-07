@@ -2,9 +2,9 @@
  * English language pack
  */
 const en = {
-  // Site general
+  // Site common
   site: {
-    title: "Small Games - Play 200+ Free Online Small Games"
+    title: "Small Mini Games - Play 200+ Free Online Small Mini Games"
   },
   
   // Navigation
@@ -18,28 +18,28 @@ const en = {
   
   // Home page
   home: {
-    welcomeTitle: "Welcome to Small Games",
-    welcomeMessage: "Discover and play 200+ free online small games - no installation required! Our collection of small games is perfect for quick fun during breaks or extended gaming sessions.",
-    bestCollection: "The Best Collection of Small Games Online",
-    seoDescription: "At SmallGames.live, we offer a carefully curated selection of the best small games available online. Our small games are designed to be quick to load, easy to play, and incredibly fun. Whether you're looking for action small games, puzzle small games, or multiplayer small games, we have something for everyone!",
-    whyPlay: "Why Play Small Games?",
+    welcomeTitle: "Welcome to Small Mini Games",
+    welcomeMessage: "Discover and play 200+ free online small mini games - no installation required! Our collection of small mini games is perfect for quick fun during breaks or extended gaming sessions.",
+    bestCollection: "The Best Collection of Small Mini Games Online",
+    seoDescription: "At SmallGames.live, we offer a carefully curated selection of the best small mini games available online. Our small mini games are designed to be quick to load, easy to play, and incredibly fun. Whether you're looking for action small mini games, puzzle small mini games, or multiplayer small mini games, we have something for everyone!",
+    whyPlay: "Why Play Small Mini Games?",
     quickLoad: "Quick to load and play - perfect for short breaks",
     noDownload: "No downloads required - play directly in your browser",
-    allDevices: "Works on all devices - enjoy small games on desktop or mobile",
-    freeToPlay: "Free to play - our entire collection of small games is 100% free",
-    popularGames: "Popular Small Games",
-    newGames: "New Small Games",
+    allDevices: "Works on all devices - enjoy small mini games on desktop or mobile",
+    freeToPlay: "Free to play - our entire collection of small mini games is 100% free",
+    popularGames: "Popular Small Mini Games",
+    newGames: "New Small Mini Games",
     searchResults: "Search Results",
     favoriteGames: "Favorite Games",
     recentlyPlayedGames: "Recently Played Games",
-    exploreCollection: "Explore Our Collection of Small Games",
-    exploreText1: "SmallGames.live is your go-to destination for the best small games online. Our platform offers a diverse collection of small games across multiple genres - from action and adventure to puzzles and racing. All our small games are carefully selected to ensure they're fun, engaging, and perfect for quick gaming sessions.",
-    exploreText2: "Whether you're a casual gamer looking for some quick entertainment or a dedicated player seeking new challenges, our collection of small games has something for everyone. Bookmark SmallGames.live today and discover new small games to play every day!"
+    exploreCollection: "Explore Our Collection of Small Mini Games",
+    exploreText1: "SmallGames.live is your go-to destination for the best small mini games online. Our platform offers a diverse collection of small mini games across multiple genres - from action and adventure to puzzles and racing. All our small mini games are carefully selected to ensure they're fun, engaging, and perfect for quick gaming sessions.",
+    exploreText2: "Whether you're a casual gamer looking for quick entertainment or an avid player seeking new challenges, our collection of small mini games has something for everyone. Bookmark SmallGames.live today and discover new small mini games to play every day!"
   },
   
   // Game details
   game: {
-    play: "Play",
+    play: "Play Now",
     fullscreen: "Fullscreen",
     back: "Back",
     favorite: "Favorite",
@@ -47,7 +47,7 @@ const en = {
     share: "Share",
     related: "Related Games",
     description: "Game Description",
-    instructions: "Game Instructions",
+    instructions: "How to Play",
     loading: "Loading...",
     error: "Error loading game",
     tryAgain: "Please try again later",
@@ -79,17 +79,17 @@ const en = {
   
   // Footer
   footer: {
-    aboutTitle: "About Small Games",
-    aboutText: "SmallGames.live is the premier destination for free online small games. Our collection includes 200+ carefully selected small games that are perfect for quick entertainment on any device.",
-    categoriesTitle: "Small Game Categories",
+    aboutTitle: "About Small Mini Games",
+    aboutText: "SmallGames.live is the premier destination for free online small mini games. Our collection includes 200+ carefully selected small mini games that are perfect for quick entertainment on any device.",
+    categoriesTitle: "Categories",
     quickLinksTitle: "Quick Links",
-    smallGames: "Small Games",
-    allSmallGames: "All Small Games",
-    freeSmallGames: "Free Small Games",
-    onlineSmallGames: "Online Small Games",
-    smallGamesForKids: "Small Games for Kids",
-    smallGamesForMobile: "Small Games for Mobile",
-    copyright: "The Best Collection of Small Games",
+    smallGames: "Small Mini Games",
+    allSmallGames: "All Small Mini Games",
+    freeSmallGames: "Free Small Mini Games",
+    onlineSmallGames: "Online Small Mini Games",
+    smallGamesForKids: "Small Mini Games for Kids",
+    smallGamesForMobile: "Small Mini Games for Mobile",
+    copyright: "The Best Collection of Small Mini Games",
     about: "About",
     privacy: "Privacy",
     terms: "Terms",
@@ -108,13 +108,13 @@ const en = {
     reset: "Reset"
   },
   
-  // Misc
+  // Miscellaneous
   misc: {
-    noResults: "No games found matching your search",
-    noFavorites: "You haven't added any favorites yet",
-    noHistory: "You haven't played any games yet",
+    noResults: "No games found",
+    noFavorites: "You have no favorite games yet",
+    noHistory: "You have not played any games yet",
     loading: "Loading...",
-    error: "An error occurred",
+    error: "Error",
     retry: "Retry",
     close: "Close"
   }

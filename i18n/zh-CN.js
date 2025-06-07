@@ -4,7 +4,7 @@
 const zhCN = {
   // 网站通用
   site: {
-    title: "小游戏 - 200多款免费在线小游戏"
+    title: "迷你小游戏 - 200多款免费在线迷你小游戏"
   },
   
   // 导航
@@ -18,28 +18,28 @@ const zhCN = {
   
   // 首页
   home: {
-    welcomeTitle: "欢迎来到小游戏乐园",
-    welcomeMessage: "发现并免费玩200多款在线小游戏 - 无需下载安装！我们的小游戏集合非常适合休息时间的快速娱乐或长时间的游戏体验。",
-    welcomeMessage2: "小游戏乐园是您寻找最佳在线小游戏的首选平台。我们的平台提供各种类型的小游戏 - 从动作和冒险到益智和赛车。所有小游戏都经过精心挑选，确保它们有趣、引人入胜，并且非常适合快速游戏体验。",
-    bestCollection: "最佳在线小游戏集合",
-    seoDescription: "在小游戏乐园，我们精心挑选了最好的在线小游戏。我们的小游戏加载快速、易于上手，而且非常有趣。无论您喜欢动作小游戏、益智小游戏还是多人小游戏，我们都能满足您的需求！",
-    whyPlay: "为什么玩小游戏？",
+    welcomeTitle: "欢迎来到迷你小游戏乐园",
+    welcomeMessage: "发现并免费玩200多款在线迷你小游戏 - 无需下载安装！我们的迷你小游戏集合非常适合休息时间的快速娱乐或长时间的游戏体验。",
+    welcomeMessage2: "迷你小游戏乐园是您寻找最佳在线迷你小游戏的首选平台。我们的平台提供各种类型的迷你小游戏 - 从动作和冒险到益智和赛车。所有迷你小游戏都经过精心挑选，确保它们有趣、引人入胜，并且非常适合快速游戏体验。",
+    bestCollection: "最佳在线迷你小游戏集合",
+    seoDescription: "在迷你小游戏乐园，我们精心挑选了最好的在线迷你小游戏。我们的迷你小游戏加载快速、易于上手，而且非常有趣。无论您喜欢动作迷你小游戏、益智迷你小游戏还是多人迷你小游戏，我们都能满足您的需求！",
+    whyPlay: "为什么玩迷你小游戏？",
     quickLoad: "快速加载和游戏 - 非常适合短暂休息",
     noDownload: "无需下载 - 直接在浏览器中玩",
-    allDevices: "适用于所有设备 - 在电脑或手机上享受小游戏",
-    freeToPlay: "完全免费 - 我们所有的小游戏都是100%免费的",
-    popularGames: "热门小游戏",
-    newGames: "新上线小游戏",
+    allDevices: "适用于所有设备 - 在电脑或手机上享受迷你小游戏",
+    freeToPlay: "完全免费 - 我们所有的迷你小游戏都是100%免费的",
+    popularGames: "热门迷你小游戏",
+    newGames: "新上线迷你小游戏",
     searchResults: "搜索结果",
     favoriteGames: "收藏的游戏",
     recentlyPlayedGames: "最近玩过的游戏",
-    exploreCollection: "探索我们的小游戏集合",
-    exploreText1: "小游戏乐园是您寻找最佳在线小游戏的首选平台。我们的平台提供各种类型的小游戏 - 从动作和冒险到益智和赛车。所有小游戏都经过精心挑选，确保它们有趣、引人入胜，并且非常适合快速游戏体验。",
-    exploreText2: "无论您是寻找快速娱乐的休闲玩家，还是寻求新挑战的专业玩家，我们的小游戏集合都能满足每个人的需求。立即收藏小游戏乐园，每天发现新的小游戏！",
+    exploreCollection: "探索我们的迷你小游戏集合",
+    exploreText1: "迷你小游戏乐园是您寻找最佳在线迷你小游戏的首选平台。我们的平台提供各种类型的迷你小游戏 - 从动作和冒险到益智和赛车。所有迷你小游戏都经过精心挑选，确保它们有趣、引人入胜，并且非常适合快速游戏体验。",
+    exploreText2: "无论您是寻找快速娱乐的休闲玩家，还是寻求新挑战的专业玩家，我们的迷你小游戏集合都能满足每个人的需求。立即收藏迷你小游戏乐园，每天发现新的迷你小游戏！",
     quickLoadDescription: "Quick to load and play - perfect for short breaks",
     noDownloadDescription: "No downloads required - play directly in your browser",
-    allDevicesDescription: "Works on all devices - enjoy small games on desktop or mobile",
-    freeToPlayDescription: "Free to play - our entire collection of small games is 100% free"
+    allDevicesDescription: "Works on all devices - enjoy small mini games on desktop or mobile",
+    freeToPlayDescription: "Free to play - our entire collection of small mini games is 100% free"
   },
   
   // 游戏详情
@@ -84,17 +84,17 @@ const zhCN = {
   
   // 页脚
   footer: {
-    aboutTitle: "关于小游戏乐园",
-    aboutText: "小游戏乐园是免费在线小游戏的首选目的地。我们的收藏包括200多款精心挑选的小游戏，非常适合在任何设备上快速娱乐。",
-    categoriesTitle: "小游戏分类",
+    aboutTitle: "关于迷你小游戏乐园",
+    aboutText: "迷你小游戏乐园是免费在线迷你小游戏的首选目的地。我们的收藏包括200多款精心挑选的迷你小游戏，非常适合在任何设备上快速娱乐。",
+    categoriesTitle: "迷你小游戏分类",
     quickLinksTitle: "快速链接",
-    smallGames: "小游戏",
-    allSmallGames: "所有小游戏",
-    freeSmallGames: "免费小游戏",
-    onlineSmallGames: "在线小游戏",
-    smallGamesForKids: "儿童小游戏",
-    smallGamesForMobile: "手机小游戏",
-    copyright: "最佳小游戏集合",
+    smallGames: "迷你小游戏",
+    allSmallGames: "所有迷你小游戏",
+    freeSmallGames: "免费迷你小游戏",
+    onlineSmallGames: "在线迷你小游戏",
+    smallGamesForKids: "儿童迷你小游戏",
+    smallGamesForMobile: "手机迷你小游戏",
+    copyright: "最佳迷你小游戏集合",
     about: "关于我们",
     privacy: "隐私政策",
     terms: "使用条款",
